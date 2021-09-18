@@ -42,6 +42,26 @@ verificacion.use((req,res,next)=>{
         res.status(401).send({ mensaje:"No esta autorizado, tiene que logearse"} ) 
         return
     }
+    if(token.startsWith("Bearer ")){
+        token=token.slice(7,token.length)
+    }
+
+    if(token){
+
+        jwt.verify(token,llave.llavesecreta,(error,decoded)=>{
+            if (error){
+                return res.send({mensaje:'Token Inválido'})
+            }else{
+                req.decoded=decoded
+                next()
+            }
+
+        })
+
+
+    }
+
+
     console.log(token)
 })
 
