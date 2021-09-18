@@ -1,7 +1,7 @@
 const Express= require("express")
 const jwt= require("jsonwebtoken")
 const llave = require("./middleware/llaveSecreta")
-
+const Verificacion= require("./middleware/verificacion")
 const app= Express()
 
 app.use(Express.json())
@@ -34,45 +34,16 @@ app.post("/autenticacion",(req,res)=>{
     }
 })
 
-const verificacion = Express.Router();
 
-verificacion.use((req,res,next)=>{
-    let token=req.header['x-access-token'] || req.headers['authorization']
-    if(!token){
-        res.status(401).send({ mensaje:"No esta autorizado, tiene que logearse"} ) 
-        return
-    }
-    if(token.startsWith("Bearer ")){
-        token=token.slice(7,token.length)
-    }
-
-    if(token){
-
-        jwt.verify(token,llave.llavesecreta,(error,decoded)=>{
-            if (error){
-                return res.send({mensaje:'Token Inválido'})
-            }else{
-                req.decoded=decoded
-                next()
-            }
-
-        })
-
-
-    }
-
-
-    console.log(token)
-})
 
 //ruta con autenticación
-app.get("/seguro",verificacion,(req,res)=>{
+app.get("/seguro",Verificacion,(req,res)=>{
 
     res.send("Informacion ultrasecreta")
 
 })
 
-app.get("/miperfil",verificacion,(req,res)=>{
+app.get("/miperfil",Verificacion,(req,res)=>{
 
     res.send("Informacion de mi perfil")
 
