@@ -13,6 +13,29 @@ app.get("/",(req,res)=>{
 
 app.post("/autenticacion",(req,res)=>{
 
+    //servicio de consulta en la base de datos para verificar usuario y contraseña
+    if(req.body.usuario=="administrador" && req.body.clave=="123456"){
+        //payload
+        var datosToken={
+            autenticado:true,
+            email:"demo@gmail.com",
+            nombre:"Juan Perez"
+        }
+
+        const token=jwt.sign(datosToken,llave.llavesecreta,{
+            expiresIn:'1d'
+        })
+
+        res.json({
+            mensaje:"Usuario autenticado",
+            token:token
+        })
+
+    }else{
+        res.status(404).send({mensaje:"usuario no encontrado"})
+    }
+
+
 })
 //ruta con autenticación
 app.get("/mitarjetadecredito",(req,res)=>{
