@@ -12,7 +12,6 @@ app.get("/",(req,res)=>{
 })
 
 app.post("/autenticacion",(req,res)=>{
-
     //servicio de consulta en la base de datos para verificar usuario y contraseña
     if(req.body.usuario=="administrador" && req.body.clave=="123456"){
         //payload
@@ -21,7 +20,6 @@ app.post("/autenticacion",(req,res)=>{
             email:"demo@gmail.com",
             nombre:"Juan Perez"
         }
-
         const token=jwt.sign(datosToken,llave.llavesecreta,{
             expiresIn:'1d'
         })
@@ -34,11 +32,23 @@ app.post("/autenticacion",(req,res)=>{
     }else{
         res.status(404).send({mensaje:"usuario no encontrado"})
     }
-
-
 })
+
+const verificacion = Express.Router();
+
+verificacion.use((req,res,next)=>{
+    let token=req.header['x-access-token'] || req.headers['authorization']
+    if(!token){
+        res.status(401).send({ mensaje:"No esta autorizado, tiene que logearse"} ) 
+        return
+    }
+    console.log(token)
+})
+
 //ruta con autenticación
-app.get("/mitarjetadecredito",(req,res)=>{
+app.get("/seguro",verificacion,(req,res)=>{
+
+    res.send("Informacion ultrasecreta")
 
 })
 
