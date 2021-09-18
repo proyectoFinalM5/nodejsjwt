@@ -72,5 +72,10 @@ app.get("/seguro",verificacion,(req,res)=>{
 
 })
 
+app.get("/miperfil",verificacion,(req,res)=>{
+
+    res.send("Informacion de mi perfil")
+
+})
 
 app.listen(3000,()=>console.log("Escuchando en el puerto 3000"))
