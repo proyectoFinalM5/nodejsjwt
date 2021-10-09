@@ -49,4 +49,12 @@ app.get("/miperfil",Verificacion,(req,res)=>{
 
 })
 
+
+app.get("/soloadministrador",[Verificacion],(req,res)=>{
+
+    res.send("Esta informacion puede ser consultada solo por el administrador")
+
+})
+
+
 app.listen(3000,()=>console.log("Escuchando en el puerto 3000"))
