@@ -2,6 +2,9 @@ const Express= require("express")
 const jwt= require("jsonwebtoken")
 const llave = require("./middleware/llaveSecreta")
 const Verificacion= require("./middleware/verificacion")
+
+const VerificarAdministrador = require("./middleware/verfiricarAdministrador")
+
 const app= Express()
 
 app.use(Express.json())
@@ -50,7 +53,7 @@ app.get("/miperfil",Verificacion,(req,res)=>{
 })
 
 
-app.get("/soloadministrador",[Verificacion],(req,res)=>{
+app.get("/soloadministrador",[VerificarAdministrador,Verificacion],(req,res)=>{
 
     res.send("Esta informacion puede ser consultada solo por el administrador")
 

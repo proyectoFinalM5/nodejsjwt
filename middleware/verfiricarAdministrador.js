@@ -5,7 +5,7 @@ const VerificarAdministrador = (req,res=response,next)=>{
         "user":{
             "nombre":"Juan",
             "usuario":"j@gmail.com",
-            "rol":"Administrador",
+            "rol":"Administrador,Usuario",
             "clave":"123456"
         },
         "token":'asdasdasdasd31423423rwefsdf_',
@@ -25,3 +25,5 @@ const VerificarAdministrador = (req,res=response,next)=>{
     }
    next();
 }
+
+module.exports=VerificarAdministrador;
