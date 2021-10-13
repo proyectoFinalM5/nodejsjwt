@@ -2,11 +2,14 @@ const Express= require("express")
 const jwt= require("jsonwebtoken")
 const llave = require("./middleware/llaveSecreta")
 const Verificacion= require("./middleware/verificacion")
+var cors = require('cors')
+
+
 
 const VerificarAdministrador = require("./middleware/verfiricarAdministrador")
 
 const app= Express()
-
+app.use(cors())
 app.use(Express.json())
 app.use(Express.urlencoded({extended:true}))
 
