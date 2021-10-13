@@ -4,8 +4,6 @@ const llave = require("./middleware/llaveSecreta")
 const Verificacion= require("./middleware/verificacion")
 var cors = require('cors')
 
-
-
 const VerificarAdministrador = require("./middleware/verfiricarAdministrador")
 
 const app= Express()
@@ -19,8 +17,13 @@ app.get("/",(req,res)=>{
 
 app.post("/autenticacion",(req,res)=>{
     //servicio de consulta en la base de datos para verificar usuario y contraseña
-    if(req.body.usuario=="administrador" && req.body.clave=="123456"){
+    if((req.body.usuario=="administrador" || req.body.usuario=="usuario") && req.body.clave=="123456"){
         //payload
+            var rol="admin";
+            if(req.body.usuario!="administrador"){
+                rol="user";
+            }
+
         var datosToken={
             autenticado:true,
             email:"demo@gmail.com",
@@ -32,6 +35,7 @@ app.post("/autenticacion",(req,res)=>{
 
         res.json({
             mensaje:"Usuario autenticado",
+            rol:rol,
             token:token
         })
 
