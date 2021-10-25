@@ -1,15 +1,6 @@
 const { response } = require("express");
 const VerificarAdministrador = (req,res=response,next)=>{
-    // verificar la informacion enviada
-   /* {
-        "user":{
-            "nombre":"Juan",
-            "usuario":"j@gmail.com",
-            "rol":"Administrador,Usuario",
-            "clave":"123456"
-        },
-        "token":'asdasdasdasd31423423rwefsdf_',
-    }*/
+
     if(!req.body.user){
         return res.status(500).json(
             {

@@ -27,7 +27,7 @@ app.post("/autenticacion",(req,res)=>{
         var datosToken={
             autenticado:true,
             email:"demo@gmail.com",
-            nombre:"Juan Perez"
+            nombre:"Kath Cordova"
         }
         const token=jwt.sign(datosToken,llave.llavesecreta,{
             expiresIn:'1d'
