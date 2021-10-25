@@ -9,7 +9,7 @@ const VerificarAdministrador = (req,res=response,next)=>{
         )
     }
     const {rol,nombre} =req.body.user;
-    if(rol!=='Administrador'){
+    if(rol!=='Admid'){
         return res.status(401).json({
             mensaje:`${nombre}, su rol no permite consultar este recurso`
         })
